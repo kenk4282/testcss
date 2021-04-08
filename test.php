@@ -377,7 +377,7 @@
 						<h2 class="title text-center">Features Items</h2>
 
 						<?php
-						$mysql = new mysqli("localhost","root","","shopshock");
+						$mysql = new mysqli("localhost", "root", "", "shopshock");
 						$mysql->set_charset("UTF8");
 						$sql = "SELECT product.Product_code, product.Product_Name,
 								product.Cost, product.Stock_Quantity
@@ -385,8 +385,8 @@
 						$result = $mysql->query($sql);
 						$rows = $result->fetch_all(MYSQLI_NUM);
 
-						for ($i = 0; $i < sizeof($rows) ; $i++) {
-							show_product("123", "Polo Black Limited edition", 50.25, 5);
+						for ($i = 0; $i < sizeof($rows); $i++) {
+							show_product($rows[$i][0], $rows[$i][1], number_format($rows[$i][2], 2, '.', ','), $rows[$i][3]);
 						}
 						function show_product($product_code, $productname, $price, $quantity)
 						{
@@ -397,7 +397,7 @@
 									<div class="single-products">
 										<div class="productinfo text-center">
 											<img src="images/home/product1.jpg" alt="" />
-											<h2>$<?= $price ?> Baht</h2>
+											<h2>$<?= $price ?> บาท</h2>
 											<p><?= $product_code ?></p>
 											<p><?= $productname ?></p>
 										</div>
@@ -406,7 +406,8 @@
 												<h1><b style="color:aqua">Shop Shock</b></h1>
 												<h2>$<?= $price ?> Baht</h2>
 												<p><?= $productname ?></p>
-												<input type="number" name="" id="" alt="0" min="0" max="<?= $quantity ?>"><br><hr>
+												<input type="number" name="" id="" alt="0" min="0" max="<?= $quantity ?>"><br>
+												<hr>
 												<button class="btn btn-default add-to-cart">Add to cart</button>
 											</div>
 										</div>
