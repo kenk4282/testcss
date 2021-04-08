@@ -377,7 +377,15 @@
 						<h2 class="title text-center">Features Items</h2>
 
 						<?php
-						for ($i = 0; $i <= 1; $i++) {
+						$mysql = new mysqli("localhost","root","","shopshock");
+						$mysql->set_charset("UTF8");
+						$sql = "SELECT product.Product_code, product.Product_Name,
+								product.Cost, product.Stock_Quantity
+								FROM  product";
+						$result = $mysql->query($sql);
+						$rows = $result->fetch_all(MYSQLI_NUM);
+
+						for ($i = 0; $i < sizeof($rows) ; $i++) {
 							show_product("123", "Polo Black Limited edition", 50.25, 5);
 						}
 						function show_product($product_code, $productname, $price, $quantity)
